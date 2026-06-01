@@ -1,0 +1,49 @@
+name: AliyunFaceAuthDemo
+options:
+  bundleIdPrefix: com.demo
+  deploymentTarget:
+    iOS: "9.0"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    ENABLE_BITCODE: NO
+    OTHER_LDFLAGS: "-ObjC"
+
+targets:
+  AliyunFaceAuthDemo:
+    type: application
+    platform: iOS
+    deploymentTarget: "9.0"
+    sources:
+      - path: Sources
+        type: group
+    info:
+      path: Sources/App/Info.plist
+      properties:
+        CFBundleDisplayName: 实人认证Demo
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "1"
+        UILaunchStoryboardName: LaunchScreen
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+        NSCameraUsageDescription: "应用需要使用您的相机来完成身份认证"
+        NSMicrophoneUsageDescription: "应用需要使用您的麦克风来完成身份认证"
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIRequiresFullScreen: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.demo.aliyunfaceauthdemo
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        INFOPLIST_FILE: Sources/App/Info.plist
