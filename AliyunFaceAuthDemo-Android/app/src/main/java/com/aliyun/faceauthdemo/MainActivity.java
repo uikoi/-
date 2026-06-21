@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         Request request = new Request.Builder()
-                .url(Config.SERVER_URL + "/faceauth/init")
+                .url(Config.SERVER_URL + "/api/getCertifyIdApp")
                 .post(body)
                 .build();
 
@@ -224,7 +224,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "获取CertifyId响应: " + bodyStr);
                     try {
                         JSONObject json = JSON.parseObject(bodyStr);
-                        String certifyId = json.getString("certifyId");
+                        // 服务器返回格式: { success: true, data: { certifyId: "xxx" } }
+                        JSONObject data = json.getJSONObject("data");
+                        String certifyId = data != null ? data.getString("certifyId") : null;
                         if (certifyId != null && !certifyId.isEmpty()) {
                             mainHandler.post(() -> startFaceVerify(certifyId));
                             return;
@@ -347,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         Request request = new Request.Builder()
-                .url(Config.SERVER_URL + "/faceauth/query")
+                .url(Config.SERVER_URL + "/api/verifyResultH5")
                 .post(body)
                 .build();
 
@@ -364,7 +366,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "查询认证结果: " + bodyStr);
                     try {
                         JSONObject json = JSON.parseObject(bodyStr);
-                        boolean passed = json.getBooleanValue("passed", false);
+                        // 服务器返回格式: { success: true, data: { passed: true/false } }
+                        JSONObject data = json.getJSONObject("data");
+                        boolean passed = data != null ? data.getBooleanValue("passed", false) : false;
                         mainHandler.post(() -> {
                             if (passed) {
                                 Toast.makeText(MainActivity.this, "服务端确认认证通过", Toast.LENGTH_SHORT).show();
