@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.aliyun.faceauthdemo'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.aliyun.faceauthdemo"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0.0"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // SDK的AAR包放在libs目录下
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    // 阿里云实人认证SDK AAR（你需要把SDK的aar文件放到 app/libs/ 目录下）
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+
+    // 阿里云实人认证SDK三方依赖
+    implementation 'com.squareup.okhttp3:okhttp:3.12.13'
+    implementation 'com.squareup.okio:okio:1.17.2'
+    implementation 'com.alibaba:fastjson:1.2.83_noneautotype'
+
+    // AndroidX 基础库
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.9.0'
+}
