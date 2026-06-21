@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.aliyun.faceauthdemo'
+    namespace 'com.aliyun.aliyunFaceDemo'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.aliyun.faceauthdemo"
+        applicationId "com.aliyun.aliyunFaceDemo"
         minSdk 21
         targetSdk 33
         versionCode 1
