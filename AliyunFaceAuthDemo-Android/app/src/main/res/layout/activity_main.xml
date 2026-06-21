@@ -1,76 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="24dp"
-    android:background="#FFFFFF">
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="阿里云金融级实人认证"
-        android:textSize="24sp"
-        android:textColor="#333333"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="完成身份认证，确保账户安全"
-        android:textSize="14sp"
-        android:textColor="#999999" />
-
-    <TextView
-        android:id="@+id/tv_status"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:gravity="center"
-        android:padding="12dp"
-        android:background="#F5F5F5"
-        android:text="当前状态: 等待初始化..."
-        android:textSize="13sp"
-        android:textColor="#666666" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp"
+        android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:padding="12dp"
-        android:background="#EBF5FF"
-        android:text=""
-        android:textSize="16sp"
-        android:textColor="#2196F3"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="阿里云金融级实人认证"
+            android:textSize="24sp"
+            android:textColor="#333333"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btn_start_auth"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="40dp"
-        android:text="开始人脸认证"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#2196F3"
-        android:enabled="false"
-        app:cornerRadius="12dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="完成身份认证，确保账户安全"
+            android:textSize="14sp"
+            android:textColor="#999999" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:padding="12dp"
-        android:background="#FFF8E1"
-        android:text="使用说明:\n1. 请确保在光线充足的环境下进行\n2. 认证时需要直视摄像头\n3. 部分认证方案需要配合动作完成\n4. SDK不支持模拟器，请使用真机测试"
-        android:textSize="12sp"
-        android:textColor="#795548"
-        android:lineSpacingExtra="4dp" />
+        <!-- 姓名输入 -->
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="40dp"
+            android:hint="请输入姓名"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:background="@drawable/edit_bg"
+            android:textSize="16sp" />
 
-</LinearLayout>
+        <!-- 身份证号输入 -->
+        <EditText
+            android:id="@+id/et_idcard"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
+            android:hint="请输入身份证号"
+            android:inputType="text"
+            android:maxLength="18"
+            android:padding="12dp"
+            android:background="@drawable/edit_bg"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:text="当前状态: 等待初始化..."
+            android:textSize="13sp"
+            android:textColor="#666666" />
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:padding="12dp"
+            android:background="#EBF5FF"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="#2196F3"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_start_auth"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="开始人脸认证"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2196F3"
+            android:enabled="false"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="12dp"
+            android:background="#FFF8E1"
+            android:text="使用说明:\n1. 输入姓名和身份证号\n2. 点击"开始人脸认证"\n3. 按提示完成刷脸\n4. SDK不支持模拟器，请使用真机测试"
+            android:textSize="12sp"
+            android:textColor="#795548"
+            android:lineSpacingExtra="4dp" />
+
+    </LinearLayout>
+</ScrollView>

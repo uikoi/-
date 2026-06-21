@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1001;
 
     private Button btnStartAuth;
+    private EditText etName;
+    private EditText etIdCard;
     private TextView tvStatus;
     private TextView tvResult;
 
@@ -67,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         btnStartAuth = findViewById(R.id.btn_start_auth);
+        etName = findViewById(R.id.et_name);
+        etIdCard = findViewById(R.id.et_idcard);
         tvStatus = findViewById(R.id.tv_status);
         tvResult = findViewById(R.id.tv_result);
 
@@ -157,6 +162,19 @@ public class MainActivity extends AppCompatActivity {
      * 第3步：开始认证流程
      */
     private void startAuthFlow() {
+        // 获取用户输入的姓名和身份证号
+        String certName = etName.getText().toString().trim();
+        String certNo = etIdCard.getText().toString().trim();
+        
+        if (certName.isEmpty()) {
+            Toast.makeText(this, "请输入姓名", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (certNo.isEmpty()) {
+            Toast.makeText(this, "请输入身份证号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         updateStatus("正在获取认证信息...");
         btnStartAuth.setEnabled(false);
         tvResult.setText("");
@@ -166,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "MetaInfo: " + metaInfo);
 
         // 向业务服务器发起请求获取CertifyId
-        fetchCertifyId(metaInfo);
+        fetchCertifyId(metaInfo, certName, certNo);
     }
 
     /**
@@ -190,10 +208,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 第4步：向业务服务器请求CertifyId
      */
-    private void fetchCertifyId(String metaInfo) {
+    private void fetchCertifyId(String metaInfo, String certName, String certNo) {
         JSONObject requestBody = new JSONObject();
         requestBody.put("metaInfo", metaInfo);
-        requestBody.put("sceneId", Config.SCENE_ID);
+        requestBody.put("certName", certName);
+        requestBody.put("certNo", certNo);
 
         RequestBody body = RequestBody.create(
                 requestBody.toJSONString(),
